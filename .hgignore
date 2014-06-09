@@ -1,0 +1,5 @@
+syntax: glob
+tmp/**
+log/**
+.idea/**
+Gemfile.lock
