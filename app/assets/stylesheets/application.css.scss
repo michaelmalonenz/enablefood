@@ -13,16 +13,23 @@
  *= require_tree .
  *= require_self
  */
-body{margin:0;font-family:Arial,sans-serif;font-size:14px;color:#4c5257; }
-a:visited { text-decoration: none; color: #4444AA; }
+$grey: #4c5257;
+$light-blue: #4444AA;
+$light-grey: #BFC2C6;
+$background-blue: #d5e7f4;
+$alert-success-green: #33CC00;
+$alert-danger-red: #CC0000;
+
+body{margin:0;font-family:Arial,sans-serif;font-size:14px;color: $grey; }
+a:visited { text-decoration: none; color: $light-blue; }
 
 .pull-right { text-align: right;}
-.navbar-text { margin-top: -100px; color:#6c5800; line-height: 70px; vertical-align: middle;}
+.navbar-text { margin-top: -100px; color: $grey; line-height: 70px; vertical-align: middle;}
 .centered-login { width: 170px; margin: auto; }
 
 #body {margin-left: 40px; margin-right: 40px;}
 
-#title{background:linear-gradient(white,#BFC2C6);height:70px;width:100%;top:0;min-width:1000px;}
+#title{background:linear-gradient(white,$light-grey);height:70px;width:100%;top:0;min-width:1000px;}
 #title a{font-size:16px;padding:0 20px;display:inline-block;line-height:70px;height:70px;text-decoration:none;color:#2E2F30;}
 #title a:hover {text-decoration: underline; }
 #title img { width: 282px;
@@ -31,5 +38,5 @@ a:visited { text-decoration: none; color: #4444AA; }
 .alert { height: 40px; width: 300px; position: absolute; left: calc(50% - 150px); border-radius: 5px;
     display: block; text-align: center; line-height: 40px; opacity: 0.8; border: solid 1px black;}
 
-.alert-success { background-color: #33CC00; color: black;}
-.alert-danger { background-color: #CC0000; color: black;}
+.alert-success { background-color: $alert-success-green; color: black;}
+.alert-danger { background-color: $alert-danger-red; color: black;}

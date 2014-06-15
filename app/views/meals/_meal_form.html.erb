@@ -1,0 +1,37 @@
+<%= form_for :meal, url: meals_path do |f| %>
+    <% if @meal.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@meal.errors.count, "error") %> prohibited this meal from being saved:</h2>
+          <ul>
+            <% @meal.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <%-# <%= f.hidden_field :owner %>
+    <p>
+      <%= f.text_field :title, size: 50, placeholder: 'Enter tagline / description here' %>
+    </p>
+
+    <p>
+      <%= f.label :date %>
+      <%= f.date_select :date %>
+    </p>
+
+    <p>
+      <%= f.text_field :website, size: 50, placeholder: 'Enter menu website here' %>
+    </p>
+
+    <p>
+      <% if false %>
+      <%= f.label :users %> <br />
+      <% @meal.users.each do |u| %>
+          <%= f.check_box u.username %>
+      <% end %>
+      <% end %>
+    </p>
+    <p>
+      <%= f.submit 'Save' %>
+    </p>
+<% end %>

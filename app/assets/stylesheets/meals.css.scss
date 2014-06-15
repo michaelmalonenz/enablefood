@@ -1,0 +1,12 @@
+// Place all the styles related to the meal controller here.
+// They will automatically be included in application.css.scss.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+$background-blue: #d5e7f4;
+
+.table {
+  width: 60%; text-align: center;
+}
+
+.table tr {height: 50px;}
+.list-item:hover { cursor: pointer; background-color: $background-blue;
+  border: 1px solid darken($background-blue, 10%);}
