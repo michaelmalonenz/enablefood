@@ -1,14 +1,14 @@
 class MealsController < ApplicationController
+  before_action :set_meal, only: [:show, :edit, :update, :destroy]
 
   def new
     @meal = Meal.new
     @owner = :current_user
-    #@meal.users << User.all
+    @users = User.all
   end
 
   def create
     @meal = Meal.new(meal_params)
-
     if @meal.save()
       redirect_to @meal
     else
@@ -17,7 +17,7 @@ class MealsController < ApplicationController
   end
 
   def edit
-    @meal = Meal.find(params[:id])
+    @users = User.all
   end
 
   def index
@@ -25,20 +25,26 @@ class MealsController < ApplicationController
   end
 
   def show
-    @meal = Meal.find(params[:id])
   end
 
   def update
-    @meal = Meal.new(params)
-    if Meal.update(@meal)
+    if @meal.update(params)
       redirect_to @meal
-    else
-      render 'new'
+    end
+  end
+
+  def destroy
+    if @meal.destroy
+      flash[:notice] = 'Meal successfully deleted'
+      redirect_to meals_path
     end
   end
 
   private
+  def set_meal
+    @meal = Meal.find(params[:id])
+  end
   def meal_params
-    params.require(:meal).permit(:title, :date, :website)
+    params.require(:meal).permit(:title, :date, :website, :user_ids => [])
   end
 end

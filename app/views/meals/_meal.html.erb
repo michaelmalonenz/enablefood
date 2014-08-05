@@ -1,6 +1,16 @@
-<%= link_to '[edit]', edit_meal_path(@meal) %>
+<br/>
+<%= link_to 'Edit', edit_meal_path(@meal), class: 'button' %>
 <h2> <%= @meal.title %> </h2>
 <h2> Date: <%= @meal.date %> </h2>
 <p>
   Website: <%= @meal.website %>
 </p>
+<p>
+  <table>
+    <tr><th>Users Participating:</th></tr>
+  <% @meal.users.each do |u| %>
+      <tr><td><%= u.email %></td></tr>
+  <% end %>
+  </table>
+</p>
+

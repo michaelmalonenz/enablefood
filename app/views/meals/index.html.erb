@@ -1,5 +1,6 @@
-<h1>Listing Meals</h1>
+<h1>Meals</h1>
 
+<%= link_to('Create New', new_meal_path, class: 'button') %>
 <table class="table">
   <tr>
     <th style="width: 20%;">Date</th>
@@ -8,6 +9,7 @@
 
   <% @meals.each do |meal| %>
       <tr onclick="meal.show_meal(<%= meal.id %>)" class="list-item">
+        <td><%= link_to 'Delete',  {action: :destroy,  id: meal.id }, method: :delete, data: { confirm: 'Are you sure?' }, class: :button %></td>
         <td><%= meal.date %></td>
         <td><%= meal.title %></td>
       </tr>
