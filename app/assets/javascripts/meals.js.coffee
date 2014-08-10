@@ -4,3 +4,15 @@
 window.meal = {};
 
 meal.show_meal = (id) ->  document.location = '/meals/' + id
+
+meal.delete_meal = (id) ->
+  global.askYesNoQuestion('Are you sure?', 'Do you really want to delete this meal?',
+    () ->
+      $.ajax({
+        url: '/meals/' + id,
+        type: 'delete',
+        success: () ->
+          document.location = '/meals'
+#          event.stopPropagation()
+      })
+  )

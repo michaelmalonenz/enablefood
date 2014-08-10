@@ -29,6 +29,7 @@ class MealsController < ApplicationController
 
   def update
     if @meal.update(meal_params)
+      flash[:notice] = 'Meal successfully saved'
       redirect_to @meal
     end
   end
