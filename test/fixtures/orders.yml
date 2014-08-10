@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cost: 9.99
+  description: MyString
+  meal_id: 
+  user_id: 
+
+two:
+  cost: 9.99
+  description: MyString
+  meal_id: 
+  user_id: 
