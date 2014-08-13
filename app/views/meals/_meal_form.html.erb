@@ -9,7 +9,9 @@
           </ul>
         </div>
     <% end %>
-    <%-# <%= f.hidden_field :owner %>
+    <% @meal.orders.each do |order| %>
+        <%= f.hidden_field :order_ids, :multiple => true, :value => order.id %>
+    <% end %>
     <p>
       <%= f.text_field :title, size: 50, placeholder: 'Enter tagline / description here' %>
     </p>

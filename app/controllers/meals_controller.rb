@@ -9,6 +9,9 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.new(meal_params)
+    @meal.users.each do |user|
+      @meal.orders << Order.new(:user => user, :meal => @meal)
+    end
     if @meal.save()
       redirect_to @meal
     else
@@ -45,6 +48,7 @@ class MealsController < ApplicationController
   def set_meal
     @meal = Meal.find(params[:id])
   end
+
   def meal_params
     params.require(:meal).permit(:title, :date, :website, :user_ids => [])
   end
