@@ -6,6 +6,13 @@
   Website: <%= @meal.website %>
 </p>
 <p>
+  <%# Need to mention when an order has been placed... and then paid eventually %>
+  <% order = @meal.orders.where(user_id: current_user.id).take %>
+  <% if !order.nil? %>
+    <%= render('order/order_form') %>
+  <% end %>
+</p>
+<p>
   <table>
     <tr><th>Users Participating:</th></tr>
   <% @meal.users.each do |u| %>

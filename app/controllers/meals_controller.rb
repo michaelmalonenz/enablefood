@@ -5,12 +5,13 @@ class MealsController < ApplicationController
     @meal = Meal.new
     @owner = :current_user
     @users = User.all
+    @meal.orders.build()
   end
 
   def create
     @meal = Meal.new(meal_params)
     @meal.users.each do |user|
-      @meal.orders << Order.new(:user => user, :meal => @meal)
+      @meal.orders << Order.new(:user_id => user.id, :meal_id => @meal.id)
     end
     if @meal.save()
       redirect_to @meal
@@ -28,6 +29,7 @@ class MealsController < ApplicationController
   end
 
   def show
+
   end
 
   def update

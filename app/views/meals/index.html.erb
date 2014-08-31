@@ -8,10 +8,10 @@
     <th>Title</th>
   </tr>
 
-  <!-- onclick="meal.show_meal(<# %= meal.id %>)" -->
+  <!--  -->
   <% @meals.each do |meal| %>
-      <tr  class="list-item">
-        <td><%= link_to 'Delete', "#", :onclick => "meal.delete_meal(#{meal.id})", class: :button %></td>
+      <tr  class="list-item" onclick="meal.show_meal(<%= meal.id %>)">
+        <td><div onclick="meal.delete_meal(<%= meal.id %>); return false;" class="button">Delete</div></td>
         <td><%= meal.date %></td>
         <td><%= meal.title %></td>
       </tr>

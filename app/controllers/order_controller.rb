@@ -22,7 +22,6 @@ class OrderController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
