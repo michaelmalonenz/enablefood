@@ -10,7 +10,7 @@
 
   <!--  -->
   <% @meals.each do |meal| %>
-      <tr  class="list-item" onclick="meal.show_meal(<%= meal.id %>)">
+      <tr class="list-item" onclick="meal.show_meal(<%= meal.id %>); return false;" >
         <td><div onclick="meal.delete_meal(<%= meal.id %>); return false;" class="button">Delete</div></td>
         <td><%= meal.date %></td>
         <td><%= meal.title %></td>

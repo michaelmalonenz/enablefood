@@ -18,6 +18,7 @@ preload([
   '/assets/blackTransparentBg.png'
 ]);
 
+
 global.askYesNoQuestion = (title, question, callback) ->
   popup = $("<div class='popup'>
                  <div>
@@ -27,15 +28,15 @@ global.askYesNoQuestion = (title, question, callback) ->
                     <div class='button defaultBtn' data-val='true' style='margin-right:10px;' tabindex='2'>Yes</div>
                     <div style='clear:both;'></div>
                  </div>
-              </div>");
-  popup.prependTo("body");
+              </div>")
+  popup.prependTo("body")
 
   box = $("body > .popup").first()
 
   #adding question this way to allow jquery objects with bound events etc to be displayed in popup instead of just html string
   box.find("p").append(question)
-  #box.children().css({ marginTop: -box.children().outerHeight(false) })
-  #box.hide()
+  box.children().css({ marginTop: -box.children().outerHeight(false) })
+  box.hide().fadeIn()
   box.find(".button").click(() ->
     res = $(this).data("val")
     box.fadeOut(() ->
@@ -45,5 +46,3 @@ global.askYesNoQuestion = (title, question, callback) ->
     )
   )
   box.find(".defaultBtn").focus()
-  box.fadeIn()
-

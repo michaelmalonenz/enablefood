@@ -9,6 +9,7 @@
   <%# Need to mention when an order has been placed... and then paid eventually %>
   <% order = @meal.orders.where(user_id: current_user.id).take %>
   <% if !order.nil? %>
+    <% @order = order %>
     <%= render('order/order_form') %>
   <% end %>
 </p>

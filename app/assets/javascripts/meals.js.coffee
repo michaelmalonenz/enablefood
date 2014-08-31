@@ -16,3 +16,5 @@ meal.delete_meal = (id) ->
             document.location = '/meals'
         })
   )
+  event.stopPropagation()
+  return false
