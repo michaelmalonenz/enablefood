@@ -12,8 +12,8 @@ preload = (arrayOfImages) ->
   , false)
 
 
-#Pre-load the background image for the transparent black, so that the UI doesn't suffer when the image request is sent
-#at the same time as the main request spawning the dialog (Jobs Export!)
+#Pre-load the background image for the transparent black, so that the UI doesn't suffer
+# when the image request is sent at the same time as the main request spawning the dialog
 preload([
   '/assets/blackTransparentBg.png'
 ]);
@@ -21,10 +21,10 @@ preload([
 global.askYesNoQuestion = (title, question, callback) ->
   popup = $("<div class='popup'>
                  <div>
-                    <div class='popup-title'>" + title + "</div>
+                    <div class='popup-title'>#{title}</div>
                     <p></p>
-                    <a href='javascript:void(0)' class='button' data-val='false' tabindex='1'>No</a>
-                    <a href='javascript:void(0)' class='button' data-val='true' style='margin-right:10px;' tabindex='2'>Yes</a>
+                    <div class='button' data-val='false' tabindex='1'>No</div>
+                    <div class='button defaultBtn' data-val='true' style='margin-right:10px;' tabindex='2'>Yes</div>
                     <div style='clear:both;'></div>
                  </div>
               </div>");
@@ -39,9 +39,11 @@ global.askYesNoQuestion = (title, question, callback) ->
   box.find(".button").click(() ->
     res = $(this).data("val")
     box.fadeOut(() ->
-      #invoke callback before popup remove in case callback wants to do something before removal (e.g. Devices change group)
+      #invoke callback before popup remove in case callback wants to do something before removal
       try callback(res)
       finally $(this).closest(".popup").remove()
     )
   )
+  box.find(".defaultBtn").focus()
   box.fadeIn()
+
