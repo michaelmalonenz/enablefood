@@ -33,6 +33,7 @@ class MealsController < ApplicationController
   end
 
   def update
+    #should add orders for those users who are new.
     if @meal.update(meal_params)
       flash[:notice] = 'Meal successfully saved'
       redirect_to @meal
@@ -42,7 +43,7 @@ class MealsController < ApplicationController
   def destroy
     if @meal.destroy
       flash[:notice] = 'Meal successfully deleted'
-      redirect_to meals_path
+      render :js => "window.location = '/meals'"
     end
   end
 
