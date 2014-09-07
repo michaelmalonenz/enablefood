@@ -8,5 +8,34 @@ $background-blue: #d5e7f4;
 }
 
 .table tr {height: 50px;}
-.table tr:hover { cursor: pointer; background-color: $background-blue;
+.table > tbody > tr:hover { cursor: pointer; background-color: $background-blue;
   border: 1px solid darken($background-blue, 10%);}
+
+.orders-table {
+  width: 50%;
+}
+
+.orders-table tbody td {
+  width: 33%;
+  text-align: left;
+  line-height: 25px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.right {
+  float: right;
+}
+.title {
+  text-align: center;
+}
+
+.total-row {
+  text-align: right;
+  border-top: double 1px black;
+}

@@ -21,6 +21,17 @@ $alert-success-green: #33CC00;
 $alert-danger-red: #CC0000;
 
 body{margin:0;font-family:Arial,sans-serif;font-size:14px;color: $grey; }
+a {
+  text-decoration: none;
+  color: $light-blue;
+}
+a:hover {
+  text-decoration: underline;
+  color: $light-blue;
+}
+a:visited {
+  color: $light-blue;
+}
 
 .pull-right { text-align: right;}
 .navbar-text { margin-top: -100px; color: $grey; line-height: 70px; vertical-align: middle;}
@@ -41,7 +52,7 @@ body{margin:0;font-family:Arial,sans-serif;font-size:14px;color: $grey; }
 .alert-danger { background-color: $alert-danger-red; color: black;}
 
 input[type=submit], .button {
-  font-size:14px;text-decoration:none;color:$grey;
+  font-size:14px;text-decoration:none;color:$grey !important;
   padding:5px 16px;border:1px solid #999;
   border-radius:3px;display:inline-block;vertical-align:middle;
   margin-right:5px;cursor:pointer;background-color:#f0f0f0;
@@ -62,3 +73,4 @@ input[type=submit], .button {
 .popup .popup-title { background-color: #E8EBEE; padding: 20px; margin: -20px; margin-bottom: 20px; }
 .popup .popup-content { max-height: 400px; overflow: auto; margin-bottom: 5px; }
 .popup .btn, .popup .button { float: right; }
+

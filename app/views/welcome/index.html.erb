@@ -1,7 +1,5 @@
 <p>This is a web app for figuring out who wants what, who has paid and which thieving bastards still owe money.</p>
 
 <% if !user_signed_in? %>
-    <div class="centered-login">
-        <%= render 'devise/sessions/form' %>
-    </div>
+    <%= render 'devise/sessions/form' %>
 <% end %>

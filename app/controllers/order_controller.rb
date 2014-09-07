@@ -25,7 +25,10 @@ class OrderController < ApplicationController
   end
 
   def update
-
+    if @order.update(order_params)
+      flash[:notice] = 'Order placed!'
+      redirect_to @order.meal
+    end
   end
 
   private
@@ -34,6 +37,6 @@ class OrderController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:description, :price)
+    params.require(:order).permit(:description, :cost)
   end
 end
