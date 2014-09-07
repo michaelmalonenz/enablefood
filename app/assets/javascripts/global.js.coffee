@@ -4,19 +4,19 @@ $(document).ready( () ->
   $('.alert').delay(2500).fadeOut();
 );
 
-preload = (arrayOfImages) ->
+global.preload = (arrayOfImages) ->
   window.addEventListener('load', () ->
       $(arrayOfImages).each(() ->
-        $('<img />').attr('src', this).appendTo('body').hide();
-      );
+        $('<img />').attr('src', this).appendTo('body').hide()
+      )
   , false)
 
 
 #Pre-load the background image for the transparent black, so that the UI doesn't suffer
 # when the image request is sent at the same time as the main request spawning the dialog
-preload([
+global.preload([
   '/assets/blackTransparentBg.png'
-]);
+])
 
 
 global.askYesNoQuestion = (title, question, callback) ->
@@ -46,3 +46,7 @@ global.askYesNoQuestion = (title, question, callback) ->
     )
   )
   box.find(".defaultBtn").focus()
+
+
+global.send_attribute = (controller, objectId, attribute, value, callback) ->
+  $.post("/#{controller}/attribute", "{ id : #{objectId}, #{attribute} : #{value} }", callback )

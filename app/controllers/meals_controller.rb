@@ -3,13 +3,13 @@ class MealsController < ApplicationController
 
   def new
     @meal = Meal.new
-    @owner = :current_user
     @users = User.all
     @meal.orders.build()
   end
 
   def create
     @meal = Meal.new(meal_params)
+    @meal.owner_id = current_user.id
     @meal.users.each do |user|
       @meal.orders << Order.new(:user_id => user.id, :meal_id => @meal.id)
     end

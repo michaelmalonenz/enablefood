@@ -2,7 +2,7 @@
 <%= link_to 'Edit', edit_meal_path(@meal), :class => 'button' %>
 <h2 class="title"> <%= @meal.title %> </h2>
 <%= image_tag('menu_swirl.png', :class => 'center') %>
-<div class="right"><h2> Date: <%= @meal.date %> </h2></div>
+<div class="right"><h3> <%= @meal.date %> </h3></div>
 
 <p>
   <%= link_to @meal.website, @meal.website, :target => '_blank' %>
@@ -22,10 +22,14 @@
     </thead>
     <tbody>
   <% @meal.orders.each do |o| %>
-        <tr><td><%= o.user.email %></td><td><%= o.description %></td><td style="text-align: right"><%= number_to_currency o.cost %></td></tr>
+    <% @order = o %>
+    <%= render :partial => 'order/order_row', :locals => { :owner => (@meal.owner_id == current_user.id) } %>
   <% end %>
     </tbody>
-    <tfoot><tr><td class="total-row" colspan="3">Total: <%= number_to_currency @meal.total_cost %></td></tr></tfoot>
+    <tfoot>
+        <tr><td class="total-row" colspan="3">Total: <%= number_to_currency @meal.total_cost %></td></tr>
+        <tr><td class="total-row" colspan="3">Owing: <%= number_to_currency @meal.total_owing %></td></tr>
+    </tfoot>
   </table>
 </div>
 

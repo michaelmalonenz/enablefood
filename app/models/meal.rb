@@ -9,4 +9,12 @@ class Meal < ActiveRecord::Base
     end
     return total
   end
+
+  def total_owing
+    owing = 0.0
+    orders.each do |o|
+      owing += o.cost unless o.has_paid?
+    end
+    return owing
+  end
 end

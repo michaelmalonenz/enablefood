@@ -31,12 +31,17 @@ class OrderController < ApplicationController
     end
   end
 
+  def attribute
+    set_order
+
+  end
+
   private
   def set_order
     @order = Order.find(params[:id])
   end
 
   def order_params
-    params.require(:order).permit(:description, :cost)
+    params.require(:order).permit(:description, :cost, :has_paid)
   end
 end
