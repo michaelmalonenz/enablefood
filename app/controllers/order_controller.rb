@@ -33,7 +33,9 @@ class OrderController < ApplicationController
 
   def attribute
     set_order
-
+    @order.send(params[:attribute]+'=', params[:value])
+    @order.save()
+    render :nothing => true, status: 200
   end
 
   private

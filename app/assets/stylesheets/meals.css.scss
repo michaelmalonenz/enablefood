@@ -47,3 +47,13 @@ $background-blue: #d5e7f4;
   text-align: right;
   border-top: double 1px black;
 }
+
+.disabled-row {
+  border-spacing: 0;
+  font-style: oblique;
+  color: lightgray;
+}
+
+.disabled-row input[type=checkbox] {
+  color: lightgray;
+}

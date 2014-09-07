@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :meals
   resources :order
 
+  post 'order/attribute' => 'order#attribute'
+
   get 'welcome/index'
 
   devise_for :users

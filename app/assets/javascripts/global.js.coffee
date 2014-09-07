@@ -47,6 +47,3 @@ global.askYesNoQuestion = (title, question, callback) ->
   )
   box.find(".defaultBtn").focus()
 
-
-global.send_attribute = (controller, objectId, attribute, value, callback) ->
-  $.post("/#{controller}/attribute", "{ id : #{objectId}, #{attribute} : #{value} }", callback )

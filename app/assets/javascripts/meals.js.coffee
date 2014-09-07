@@ -17,3 +17,15 @@ meal.delete_meal = (id) ->
   )
   event.stopPropagation()
 
+
+meal.send_attribute = (controller, objectId, attr, value, callback) ->
+  $.post("/#{controller}/attribute", { id : objectId, attribute : attr, value : value }, callback )
+
+window.addEventListener('load', () ->
+  $('.ajax-paid').change(() ->
+    [order_id, meal_id] = this.value.split(':')
+    meal.send_attribute( 'order', order_id, 'has_paid', this.checked, () ->
+      meal.show_meal(meal_id)
+    )
+  )
+)
