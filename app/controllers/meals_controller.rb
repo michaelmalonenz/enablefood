@@ -42,8 +42,8 @@ class MealsController < ApplicationController
 
   def destroy
     if @meal.destroy
+      render :nothing => true, :status => 200
       flash[:notice] = 'Meal successfully deleted'
-      render :js => "window.location = '/meals'"
     end
   end
 

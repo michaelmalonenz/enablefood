@@ -11,7 +11,8 @@ meal.delete_meal = (id) ->
       if (res == true)
         $.ajax({
           url: '/meals/' + id,
-          type: 'delete'
+          type: 'delete',
+          success: document.location = '/meals'
         })
   )
   event.stopPropagation()
