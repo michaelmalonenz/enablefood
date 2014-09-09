@@ -33,8 +33,12 @@ class MealsController < ApplicationController
   end
 
   def update
-    #should add orders for those users who are new.
     if @meal.update(meal_params)
+      @meal.users.each do |u|
+        if Order.where('user_id = ? AND meal_id = ?', u.id, @meal.id).empty?
+          @meal.orders.create(:user => u)
+        end
+      end
       flash[:notice] = 'Meal successfully saved'
       redirect_to @meal
     end
@@ -53,6 +57,6 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:title, :date, :website, :user_ids => [])
+    params.require(:meal).permit(:title, :date, :website, :user_ids => [], :order_ids => [])
   end
 end
