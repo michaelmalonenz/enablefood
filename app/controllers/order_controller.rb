@@ -32,9 +32,14 @@ class OrderController < ApplicationController
 
   def attribute
     set_order
-    @order.send(params[:attribute]+'=', params[:value])
-    @order.save()
-    render :nothing => true, status: 200
+    parameters = attr_params
+    if permitted_attributes.include? paramters[:attribute]
+      @order.send(params[:attribute]+'=', params[:value])
+      @order.save()
+      render :nothing => true, status: :ok
+    else
+      render plain: "attribute '#{parameters[:attribute]}' not permitted", status: :bad_request
+    end
   end
 
   private
@@ -42,7 +47,15 @@ class OrderController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def attr_params
+    params.permit(:attribute, :value)
+  end
+
+  def permitted_attributes
+    [:description, :cost, :has_paid]
+  end
+
   def order_params
-    params.require(:order).permit(:description, :cost, :has_paid)
+    params.require(:order).permit(permitted_attributes)
   end
 end
