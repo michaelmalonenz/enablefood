@@ -23,7 +23,7 @@
     <tbody>
   <% @meal.orders.each do |o| %>
     <% @order = o %>
-    <%= render :partial => 'order/order_row', :locals => { :owner => (@meal.owner_id == current_user.id) } %>
+    <%= render :partial => 'order/order', :locals => { :owner => (@meal.owner_id == current_user.id) } %>
   <% end %>
     </tbody>
     <tfoot>

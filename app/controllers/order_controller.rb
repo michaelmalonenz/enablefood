@@ -1,27 +1,6 @@
 class OrderController < ApplicationController
 
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
-
-  def new
-    @order = Order.new()
-    @owner = :current_user
-    #how do I decide which meal?
-  end
-
-  def create
-    @order = Order.new(order_params)
-    if @order.save()
-      redirect_to @order
-    else
-      render 'new'
-    end
-  end
-
-  def show
-  end
-
-  def edit
-  end
+  before_action :set_order, only: [:update, :attribute]
 
   def update
     if @order.update(order_params)
@@ -31,7 +10,6 @@ class OrderController < ApplicationController
   end
 
   def attribute
-    set_order
     parameters = attr_params
     if permitted_attributes.include? paramters[:attribute]
       @order.send(params[:attribute]+'=', params[:value])
