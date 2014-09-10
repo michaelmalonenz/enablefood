@@ -1,5 +1,8 @@
 <br/>
-<%= link_to 'Edit', edit_meal_path(@meal), :class => 'button' %>
+<% owner = (@meal.owner_id == current_user.id) %>
+<% if owner %>
+    <%= link_to 'Edit', edit_meal_path(@meal), :class => 'button' %>
+<% end %>
 <h2 class="title"> <%= @meal.title %> </h2>
 <%= image_tag('menu_swirl.png', :class => 'center') %>
 <div class="right"><h3> <%= @meal.date %> </h3></div>
@@ -8,9 +11,8 @@
   <%= link_to @meal.website, @meal.website, :target => '_blank' %>
 </p>
 <p>
-  <%# Need to mention when an order has been placed... and then paid eventually %>
   <% order = @meal.orders.where(user_id: current_user.id).take %>
-  <% if !order.nil? %>
+  <% if !order.nil? && !@meal.orders_closed %>
     <% @order = order %>
     <%= render('order/order_form') %>
   <% end %>
@@ -23,7 +25,7 @@
     <tbody>
   <% @meal.orders.each do |o| %>
     <% @order = o %>
-    <%= render :partial => 'order/order', :locals => { :owner => (@meal.owner_id == current_user.id) } %>
+    <%= render :partial => 'order/order', :locals => { :owner => owner } %>
   <% end %>
     </tbody>
     <tfoot>
@@ -31,5 +33,10 @@
         <tr><td class="total-row" colspan="3">Owing: <%= number_to_currency @meal.total_owing %></td></tr>
     </tfoot>
   </table>
+  <% if owner && !@meal.orders_closed %>
+    <div class="right-ish">
+        <div class="button right close-orders" data-meal-id="<%=@meal.id%>"> Close Orders </div>
+    </div>
+  <% end %>
 </div>
 

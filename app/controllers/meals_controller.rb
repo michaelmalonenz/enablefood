@@ -1,5 +1,5 @@
 class MealsController < ApplicationController
-  before_action :set_meal, only: [:show, :edit, :update, :destroy]
+  before_action :set_meal, only: [:show, :edit, :update, :destroy, :close_orders]
 
   def new
     @meal = Meal.new
@@ -49,6 +49,12 @@ class MealsController < ApplicationController
       render :nothing => true, :status => 200
       flash[:notice] = 'Meal successfully deleted'
     end
+  end
+
+  def close_orders
+    @meal.orders_closed = true
+    @meal.save()
+    render :nothing => true, status => :ok
   end
 
   private

@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   resources :meals
   resources :order
 
+  post 'order/update' => 'order#update'
   post 'order/attribute' => 'order#attribute'
+
+  post 'meals/:id/closeorders' => 'meals#close_orders'
 
   get 'welcome/index'
 

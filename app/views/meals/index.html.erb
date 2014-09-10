@@ -4,7 +4,7 @@
 <table class="table">
   <thead>
       <tr>
-        <th></th>
+        <th style="width: 20%;"></th>
         <th style="width: 20%;">Date</th>
         <th>Title</th>
       </tr>
@@ -12,7 +12,11 @@
   <tbody>
       <% @meals.each do |meal| %>
           <tr class="list-item" onclick="meal.show_meal(<%= meal.id %>);" >
-            <td><div onclick="meal.delete_meal(<%= meal.id %>);" class="button">Delete</div></td>
+            <td>
+              <% if meal.owner_id == current_user.id %>
+                <div onclick="meal.delete_meal(<%= meal.id %>);" class="button">Delete</div>
+              <% end %>
+            </td>
             <td><%= meal.date %></td>
             <td><%= meal.title %></td>
           </tr>

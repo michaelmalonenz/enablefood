@@ -4,7 +4,7 @@
 $background-blue: #d5e7f4;
 
 .table {
-  width: 60%; text-align: center; border-spacing: 0;
+  width: 70%; text-align: center; border-spacing: 0;
 }
 
 .table tr {height: 50px;}
@@ -38,6 +38,10 @@ $background-blue: #d5e7f4;
 
 .right {
   float: right;
+}
+
+.right-ish{
+  width: 70%;
 }
 .title {
   text-align: center;
