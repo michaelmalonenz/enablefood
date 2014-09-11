@@ -5,7 +5,7 @@ class Meal < ActiveRecord::Base
   def total_cost
     total = 0.0
     orders.each do |o|
-      total += o.cost
+      total += o.cost || 0
     end
     return total
   end
@@ -13,7 +13,7 @@ class Meal < ActiveRecord::Base
   def total_owing
     owing = 0.0
     orders.each do |o|
-      owing += o.cost unless o.has_paid?
+      owing += o.cost || 0 unless o.has_paid?
     end
     return owing
   end
