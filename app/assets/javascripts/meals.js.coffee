@@ -3,9 +3,10 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 window.meal = {};
 
-meal.show_meal = (id) ->  document.location = '/meals/' + id
+meal.show_meal = (event, id) ->  document.location = '/meals/' + id
 
-meal.delete_meal = (id) ->
+meal.delete_meal = (event, id) ->
+  event.stopPropagation()
   global.askYesNoQuestion('Are you sure?', 'Do you really want to delete this meal?',
     (res) ->
       if (res == true)
@@ -15,7 +16,8 @@ meal.delete_meal = (id) ->
           success: document.location = '/meals'
         })
   )
-  event.stopPropagation()
+  return false
+
 
 
 meal.send_attribute = (controller, objectId, attr, value, callback) ->

@@ -11,10 +11,10 @@
   </thead>
   <tbody>
       <% @meals.each do |meal| %>
-          <tr class="list-item" onclick="meal.show_meal(<%= meal.id %>);" >
+          <tr class="list-item" onclick="meal.show_meal(event, <%= meal.id %>);" >
             <td>
               <% if meal.owner_id == current_user.id %>
-                <div onclick="meal.delete_meal(<%= meal.id %>);" class="button">Delete</div>
+                <div onclick="meal.delete_meal(event, <%= meal.id %>);" class="button">Delete</div>
               <% end %>
             </td>
             <td><%= meal.date %></td>
