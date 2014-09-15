@@ -45,7 +45,7 @@ a:visited {
 #title img { width: 282px;
     position: relative; top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-50%);}
 
-.alert { height: 40px; width: 400px; position: absolute; left: calc(50% - 150px); border-radius: 5px;
+.alert { height: 40px; width: 400px; position: absolute; left: calc(50% - 200px); border-radius: 5px;
     display: block; text-align: center; line-height: 40px; opacity: 0.8; border: solid 1px black;}
 
 .alert-success { background-color: $alert-success-green; color: black;}
