@@ -24,10 +24,10 @@ meal.send_attribute = (controller, objectId, attr, value, callback) ->
   $.post("/#{controller}/attribute", { id : objectId, attribute : attr, value : value }, callback )
 
 window.addEventListener('load', () ->
-  $('.ajax-paid').change(() ->
+  $('.ajax-paid').change((event) ->
     [order_id, meal_id] = this.value.split(':')
     meal.send_attribute( 'order', order_id, 'has_paid', this.checked, () ->
-      meal.show_meal(meal_id)
+      meal.show_meal(event, meal_id)
     )
   )
 
