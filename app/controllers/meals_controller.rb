@@ -52,8 +52,15 @@ class MealsController < ApplicationController
   end
 
   def close_orders
-    @meal.orders_closed = true
-    @meal.save()
+    @meal.transaction do
+      @meal.orders_closed = true
+      @meal.orders.each do |o|
+        if (o.description.blank? && o.cost == 0)
+          Order.destroy(o)
+        end
+      end
+      @meal.save()
+    end
     render :nothing => true, status => :ok
   end
 
