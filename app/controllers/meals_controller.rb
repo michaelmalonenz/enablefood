@@ -12,7 +12,7 @@ class MealsController < ApplicationController
     @meal.users.each do |user|
       @meal.orders << Order.new(:user_id => user.id, :meal_id => @meal.id)
     end
-    @meal.owner_id = current_user.id if (@meal.users.select { |u| u.id == @meal.owner_id }).empty?
+    check_owner
     if @meal.save()
       redirect_to @meal
     else
@@ -39,6 +39,7 @@ class MealsController < ApplicationController
           @meal.orders.create(:user => u)
         end
       end
+      check_owner
       flash[:notice] = 'Meal successfully saved'
       redirect_to @meal
     end
@@ -66,6 +67,10 @@ class MealsController < ApplicationController
   end
 
   private
+  def check_owner
+    @meal.owner_id = current_user.id if (@meal.users.select { |u| u.id == @meal.owner_id }).empty?
+  end
+
   def set_meal
     @meal = Meal.find(params[:id])
   end
