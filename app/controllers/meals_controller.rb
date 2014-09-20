@@ -59,6 +59,7 @@ class MealsController < ApplicationController
           Order.destroy(o)
         end
       end
+      @meal.generate_summary!
       @meal.save()
     end
     render :nothing => true, status => :ok

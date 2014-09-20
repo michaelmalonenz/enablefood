@@ -38,5 +38,8 @@
         <div class="button right close-orders" data-meal-id="<%=@meal.id%>"> Close Orders </div>
     </div>
   <% end %>
+  <% if @meal.orders_closed? && !@meal.summary.nil?  %>
+      <p class="center"><%= @meal.summary.gsub("\n", '<br />').html_safe %> </p>
+  <% end %>
 </div>
 

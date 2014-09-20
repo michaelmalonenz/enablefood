@@ -3,10 +3,12 @@ class OrderController < ApplicationController
   before_action :set_order, only: [:update, :attribute]
 
   def update
-    if @order.update(order_params)
+    if @order.meal.orders_closed?
+      flash[:alert] = 'Meal has been closed'
+    elsif @order.update(order_params)
       flash[:notice] = 'Order placed!'
-      redirect_to @order.meal
     end
+    redirect_to @order.meal
   end
 
   def attribute
