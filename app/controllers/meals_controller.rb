@@ -9,10 +9,10 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.new(meal_params)
-    @meal.owner_id = current_user.id
     @meal.users.each do |user|
       @meal.orders << Order.new(:user_id => user.id, :meal_id => @meal.id)
     end
+    @meal.owner_id = current_user.id if (@meal.users.select { |u| u.id == @meal.owner_id }).empty?
     if @meal.save()
       redirect_to @meal
     else
@@ -71,6 +71,6 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:title, :date, :website, :user_ids => [], :order_ids => [])
+    params.require(:meal).permit(:title, :date, :website, :owner_id, :user_ids => [], :order_ids => [])
   end
 end

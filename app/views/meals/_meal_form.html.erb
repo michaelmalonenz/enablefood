@@ -26,9 +26,13 @@
     </p>
 
     <p>
+      <%= f.label 'Owner' %>
+      <%= f.collection_select(:owner_id, @users, :id, :email, {:selected => current_user.id}) %>
+    </p>
+    <p>
         <%= f.label 'Users to include' %>
       <div class="field">
-        <%= collection_check_boxes(:meal, :user_ids, @users, :id, :email) do |b| %>
+        <%= f.collection_check_boxes(:user_ids, @users, :id, :email) do |b| %>
           <%= b.label(:'data-value' => b.value) { b.check_box + b.text } %>
             <br/>
         <% end %>
