@@ -33,7 +33,7 @@
         <%= f.label 'Users to include' %>
       <div class="field">
         <%= f.collection_check_boxes(:user_ids, @users, :id, :email) do |b| %>
-          <%= b.label(:'data-value' => b.value) { b.check_box + b.text } %>
+          <%= b.label('data-value' => b.value) { b.check_box + b.text } %>
             <br/>
         <% end %>
       </div>

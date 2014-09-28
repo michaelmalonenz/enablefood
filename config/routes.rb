@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'order/attribute' => 'order#attribute'
 
   post 'meals/:id/closeorders' => 'meals#close_orders'
+  get 'meals/:id/orders' => 'meals#orders'
 
   get 'welcome/index'
 

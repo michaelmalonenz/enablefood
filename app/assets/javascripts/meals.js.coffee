@@ -18,16 +18,21 @@ meal.delete_meal = (event, id) ->
   )
   return false
 
-
-
 meal.send_attribute = (controller, objectId, attr, value, callback) ->
   $.post("/#{controller}/attribute", { id : objectId, attribute : attr, value : value }, callback )
 
+meal.update_orders = () ->
+  mealId = $('#meal_id').data('meal-id')
+  $.get("/meals/#{mealId}/orders",
+  (data) ->
+      $('#orders').html(data)
+  )
+
 window.addEventListener('load', () ->
   $('.ajax-paid').change((event) ->
-    [order_id, meal_id] = this.value.split(':')
+    order_id = this.value
     meal.send_attribute( 'order', order_id, 'has_paid', this.checked, () ->
-      meal.show_meal(event, meal_id)
+      meal.show_meal(event, $('#meal_id').data('meal-id'))
     )
   )
 
@@ -39,4 +44,7 @@ window.addEventListener('load', () ->
           $.post("/meals/#{meal_id}/closeorders", success: () -> document.location = "/meals/#{meal_id}")
     )
   )
+
+  window.setInterval(meal.update_orders, 3000)
 )
+

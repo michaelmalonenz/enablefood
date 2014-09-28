@@ -5,7 +5,7 @@
   <% if owner %>
       <td class="no-wrap">
         <label>
-          <input class="ajax-paid" type="checkbox" value="<%= @order.id %>:<%= @order.meal_id %>"
+          <input class="ajax-paid" type="checkbox" value="<%= @order.id %>"
                  <%= 'checked="checked"' if @order.has_paid? %> >Paid?</label>
       </td>
   <% end %>

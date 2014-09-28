@@ -1,5 +1,5 @@
 class MealsController < ApplicationController
-  before_action :set_meal, only: [:show, :edit, :update, :destroy, :close_orders]
+  before_action :set_meal, only: [:show, :edit, :update, :destroy, :close_orders, :orders]
 
   def new
     @meal = Meal.new
@@ -29,7 +29,6 @@ class MealsController < ApplicationController
   end
 
   def show
-
   end
 
   def update
@@ -64,6 +63,10 @@ class MealsController < ApplicationController
       @meal.save()
     end
     render :nothing => true, status => :ok
+  end
+
+  def orders
+    render :partial => 'order/order_table', status => :ok
   end
 
   private

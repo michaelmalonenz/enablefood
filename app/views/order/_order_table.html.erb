@@ -1,0 +1,17 @@
+<div id="orders">
+    <table class="center orders-table">
+      <thead>
+      <tr><th colspan="3">Orders:</th><th></th><th></th></tr>
+      </thead>
+      <tbody>
+      <% @meal.orders.each do |o| %>
+          <% @order = o %>
+          <%= render :partial => 'order/order', :locals => { :owner => @meal.owner_id == current_user.id } %>
+      <% end %>
+      </tbody>
+      <tfoot>
+      <tr><td class="total-row" colspan="3">Total: <%= number_to_currency @meal.total_cost %></td></tr>
+      <tr><td class="total-row" colspan="3">Owing: <%= number_to_currency @meal.total_owing %></td></tr>
+      </tfoot>
+    </table>
+</div>
