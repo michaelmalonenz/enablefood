@@ -1,9 +1,16 @@
 require 'test_helper'
 
 class MealControllerTest < ActionController::TestCase
+
+  setup do
+    @controller = MealsController.new
+    @user = User.find_by_email('thing_one@drseuss.com')
+    sign_in @user
+  end
+
   test "should get create" do
     get :create
-    assert_response :success
+    assert_response :redirect
   end
 
   test "should get index" do
@@ -11,9 +18,13 @@ class MealControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get details" do
-    get :details
+  test "should get show" do
+    get :show
     assert_response :success
+  end
+
+  teardown do
+    sign_out @user
   end
 
 end
