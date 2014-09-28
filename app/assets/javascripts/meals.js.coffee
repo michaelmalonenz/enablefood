@@ -45,6 +45,6 @@ window.addEventListener('load', () ->
     )
   )
 
-  window.setInterval(meal.update_orders, 3000)
+  window.setInterval(meal.update_orders, 30000)
 )
 
