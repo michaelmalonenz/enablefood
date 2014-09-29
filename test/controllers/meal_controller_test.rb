@@ -8,18 +8,19 @@ class MealControllerTest < ActionController::TestCase
     sign_in @user
   end
 
-  test "should get create" do
-    get :create
+  test 'should get create' do
+    post :create, :meal => { :title => 'A new Meal', :date => '2014-09-29',
+                             :website => 'https://food.taitenable.com'}
     assert_response :redirect
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
   end
 
-  test "should get show" do
-    get :show
+  test 'should get show' do
+    get :show, :id => meals(:meal_one).id
     assert_response :success
   end
 
