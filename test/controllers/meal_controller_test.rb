@@ -1,10 +1,11 @@
+# encoding: utf-8
 require 'test_helper'
 
 class MealControllerTest < ActionController::TestCase
 
   setup do
     @controller = MealsController.new
-    @user = User.find_by_email('thing_one@drseuss.com')
+    @user = users(:user_one)
     sign_in @user
   end
 
@@ -22,6 +23,15 @@ class MealControllerTest < ActionController::TestCase
   test 'should get show' do
     get :show, :id => meals(:meal_one).id
     assert_response :success
+  end
+
+  test 'should close orders' do
+    meal = meals(:meal_one)
+    post :close_orders, :id => meal.id
+    assert_response :success
+    assert(meal.orders.length == 2, 'Orders with an empty description and cost of 0 should be removed')
+    assert(meal.orders_closed_change == [false,true], 'Orders should be marked as closed')
+    assert(meal.summary_now == 'Toni Pepperoni ✕2', 'Same orders should be grouped')
   end
 
   teardown do

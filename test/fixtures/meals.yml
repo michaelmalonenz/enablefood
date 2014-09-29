@@ -1,11 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 meal_one:
-  title: MyString
+  title: one meal
   date: 2014-06-08
-  website: MyString
+  website: www.meal.com
+  orders_closed: false
+  owner_id: user_one.id
 
 meal_two:
-  title: MyString
+  title: my meal
   date: 2014-06-08
-  website: MyString
+  website: www.sshhhh.com
+  orders_closed: false

@@ -5,8 +5,11 @@
 # below each fixture, per the syntax in the comments below
 #
 user_one:
-  email: thing_one@drseuss.com
+  email: 'thing_one@drseuss.com'
 
 user_two:
-  email: thing_two@drseuss.com
+  email: 'thing_two@drseuss.com'
+
+user_three:
+  email: 'some@email.com'
 
