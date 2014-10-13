@@ -22,7 +22,7 @@ class Meal < ActiveRecord::Base
   def generate_summary!
     same_orders = {}
     orders.each do |o|
-      key = o.description.nil? ? nil : o.description.downcase
+      key = o.description.nil? ? '' : o.description.downcase
       same_orders[key] ||= {:actual => nil, :count => 0}
       same_orders[key][:count] += 1
       same_orders[key][:actual] ||= o.description
