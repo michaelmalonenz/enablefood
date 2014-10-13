@@ -32,16 +32,22 @@ class MealsController < ApplicationController
   end
 
   def update
-    if @meal.update(meal_params)
-      @meal.users.each do |u|
-        if Order.where('user_id = ? AND meal_id = ?', u.id, @meal.id).empty?
-          @meal.orders.create(:user => u)
+    @meal.transaction do
+      if @meal.update(meal_params)
+        unless (@meal.orders_closed?)
+          @meal.users.each do |u|
+            if Order.where('user_id = ? AND meal_id = ?', u.id, @meal.id).empty?
+              @meal.orders.create(:user => u)
+            end
+          end
         end
+        check_owner
+        flash[:notice] = 'Meal successfully saved'
+      else
+        flash[:alert] = "Meal couldn't be saved"
       end
-      check_owner
-      flash[:notice] = 'Meal successfully saved'
-      redirect_to @meal
     end
+    redirect_to @meal
   end
 
   def destroy
@@ -61,6 +67,7 @@ class MealsController < ApplicationController
       end
       @meal.generate_summary!
       @meal.save()
+      flash[:notice] = "Orders closed for #{@meal.title}!"
     end
     render :nothing => true, status => :ok
   end
