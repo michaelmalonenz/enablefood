@@ -9,10 +9,14 @@ class MealControllerTest < ActionController::TestCase
     sign_in @user
   end
 
-  test 'should get create' do
+  test 'should post create' do
+    num_orders = Order.all.count
+    user_ids = [ User.find(users(:user_one)).id, User.find(users(:user_two)).id]
     post :create, :meal => { :title => 'A new Meal', :date => '2014-09-29',
-                             :website => 'https://food.taitenable.com'}
+                             :website => 'https://food.taitenable.com',
+                             :user_ids => user_ids}
     assert_response :redirect
+    assert( (Order.all.count - num_orders) == user_ids.count, 'only created orders for the users given' )
   end
 
   test 'should get index' do
