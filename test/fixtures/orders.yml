@@ -18,6 +18,12 @@ order_three:
   meal: meal_one
   user: user_three
 
+order_three:
+  cost: 0
+  description:
+  meal: meal_one
+  user: user_four
+
 order_four:
   cost: 0.00
   description: MyString

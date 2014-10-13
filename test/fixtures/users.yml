@@ -13,3 +13,6 @@ user_two:
 user_three:
   email: 'some@email.com'
 
+user_four:
+  email: 'some_other@email.com'
+
