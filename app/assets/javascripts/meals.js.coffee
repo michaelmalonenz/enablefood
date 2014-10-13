@@ -37,7 +37,7 @@ window.addEventListener('load', () ->
   )
 
   $('.close-orders').click( () ->
-    meal_id = $(this).data('meal-id')
+    meal_id = $('#meal_id').data('meal-id')
     global.askYesNoQuestion("Are you sure?", "Do you really want to close orders?",
       (res) ->
         if (res == true)
