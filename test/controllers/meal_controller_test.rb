@@ -29,9 +29,10 @@ class MealControllerTest < ActionController::TestCase
     meal = meals(:meal_one)
     post :close_orders, :id => meal.id
     assert_response :success
+    meal = Meal.find(meals(:meal_one))
     assert(meal.orders.length == 2, 'Orders with an empty description and cost of 0 should be removed')
-    assert(meal.orders_closed_change == [false,true], 'Orders should be marked as closed')
-    assert(meal.summary_now == 'Toni Pepperoni ✕2', 'Same orders should be grouped')
+    assert(meal.orders_closed == true, 'Orders should be marked as closed')
+    assert(meal.summary == "Toni Pepperoni ✕2\n", 'Same orders should be grouped')
   end
 
   teardown do
