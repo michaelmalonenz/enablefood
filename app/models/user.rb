@@ -6,5 +6,16 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :meals
   has_many :orders
-  #belongs_to :owner, :class_name => 'Meal', :foreign_key => 'meal_id'
+
+  after_create :add_orders
+
+  private
+  def add_orders
+    logger.info 'Where da bass at?'
+    Meal.where(orders_closed: nil).each do |m|
+      m.users << self
+      m.orders.create(:user => self, :meal => m)
+    end
+  end
+
 end

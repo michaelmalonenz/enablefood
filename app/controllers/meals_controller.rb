@@ -2,9 +2,10 @@ class MealsController < ApplicationController
   before_action :set_meal, only: [:show, :edit, :update, :destroy, :close_orders, :orders]
 
   def new
-    @meal = Meal.new
     @users = User.all
-    @meal.orders.build()
+    @meal = Meal.new do |m|
+      m.users = @users
+    end
   end
 
   def create

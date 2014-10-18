@@ -23,6 +23,8 @@ meal.send_attribute = (controller, objectId, attr, value, callback) ->
 
 meal.update_orders = () ->
   mealId = $('#meal_id').data('meal-id')
+  if mealId == undefined
+    return
   $.get("/meals/#{mealId}/orders",
   (data) ->
       $('#orders').html(data)
