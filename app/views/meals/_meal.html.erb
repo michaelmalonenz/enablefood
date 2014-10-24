@@ -1,7 +1,9 @@
 <br/>
-<% owner = (@meal.owner_id == current_user.id) %>
-<% if owner %>
+<% is_owner = (@meal.owner == current_user) %>
+<% if is_owner %>
     <%= link_to 'Edit', edit_meal_path(@meal), :class => 'button' %>
+<% else %>
+    <!-- Payment details, as a pop-up, and added to clipboard? -->
 <% end %>
 <h2 class="title"> <%= @meal.title %> </h2>
 <%= image_tag('menu_swirl.png', :class => 'center') %>
@@ -19,8 +21,8 @@
   <% end %>
 </p>
 <div>
-  <%= render('order/order_table', :locals => { :owner => owner, :meal => @meal }) %>
-  <% if owner && !@meal.orders_closed %>
+  <%= render('order/order_table', :locals => { :owner => is_owner, :meal => @meal }) %>
+  <% if is_owner && !@meal.orders_closed %>
     <div class="right-ish">
         <div class="button right close-orders" > Close Orders </div>
     </div>

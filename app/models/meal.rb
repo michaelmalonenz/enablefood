@@ -2,6 +2,7 @@
 class Meal < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :orders
+  belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
 
   def total_cost
     total = 0.0

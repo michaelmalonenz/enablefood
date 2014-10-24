@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
 
   private
   def add_orders
-    logger.info 'Where da bass at?'
     Meal.where(orders_closed: nil).each do |m|
       m.users << self
       m.orders.create(:user => self, :meal => m)

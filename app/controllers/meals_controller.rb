@@ -14,7 +14,7 @@ class MealsController < ApplicationController
       @meal.orders << Order.new(:user_id => user.id, :meal_id => @meal.id)
     end
     check_owner
-    if @meal.save()
+    if @meal.save
       redirect_to @meal
     else
       render 'new'
@@ -35,7 +35,7 @@ class MealsController < ApplicationController
   def update
     @meal.transaction do
       if @meal.update(meal_params)
-        unless (@meal.orders_closed?)
+        unless @meal.orders_closed?
           @meal.users.each do |u|
             if Order.where('user_id = ? AND meal_id = ?', u.id, @meal.id).empty?
               @meal.orders.create(:user => u)
@@ -62,12 +62,12 @@ class MealsController < ApplicationController
     @meal.transaction do
       @meal.orders_closed = true
       @meal.orders.each do |o|
-        if (o.description.blank? && o.cost == 0)
+        if o.description.blank? && o.cost == 0
           Order.destroy(o)
         end
       end
       @meal.generate_summary!
-      @meal.save()
+      @meal.save
       flash[:notice] = "Orders closed for #{@meal.title}!"
     end
     render :nothing => true, status => :ok
