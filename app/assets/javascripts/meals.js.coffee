@@ -28,9 +28,10 @@ meal.update_orders = () ->
   $.get("/meals/#{mealId}/orders",
   (data) ->
       $('#orders').html(data)
+      meal.addOrderListeners()
   )
 
-window.addEventListener('load', () ->
+meal.addOrderListeners = () ->
   $('.ajax-paid').change((event) ->
     order_id = this.value
     meal.send_attribute( 'order', order_id, 'has_paid', this.checked, () ->
@@ -38,6 +39,8 @@ window.addEventListener('load', () ->
     )
   )
 
+window.addEventListener('load', () ->
+  meal.addOrderListeners()
   $('.close-orders').click( () ->
     meal_id = $('#meal_id').data('meal-id')
     global.askYesNoQuestion("Are you sure?", "Do you really want to close orders?",
