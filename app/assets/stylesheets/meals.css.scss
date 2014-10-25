@@ -61,3 +61,29 @@ $background-blue: #d5e7f4;
 .disabled-row input[type=checkbox] {
   color: lightgray;
 }
+
+#owner {
+  width: 350px;
+}
+
+#owner span {
+  display: none;
+  position: relative;
+}
+
+#owner:hover {
+  visibility: hidden;
+}
+
+#owner:hover span {
+  visibility: visible;
+  display: block;
+  position: absolute;
+  float: left;
+  height:75px;
+  width: 350px;
+  border: solid black 1px;
+  padding:15px;
+  margin-top:-50px;
+  z-index: 5;
+};

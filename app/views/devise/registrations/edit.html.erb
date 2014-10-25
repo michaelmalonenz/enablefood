@@ -5,19 +5,26 @@
 
   <div><%= f.label :email %><br />
   <%= f.email_field :email, autofocus: true %></div>
+  <br />
+  <div><%= f.label :payment_details %><br />
+    <%= f.text_area :payment_details, class: :text_area %></div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
+    <br/>
 
   <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off" %></div>
 
   <div><%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+  <br />
 
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %></div>
+
+    <br />
 
   <div><%= f.submit "Update" %><%= link_to "Cancel", meals_path, class: 'button' %></div>
 <% end %>

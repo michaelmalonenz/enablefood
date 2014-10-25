@@ -8,13 +8,13 @@ meal.show_meal = (event, id) ->  document.location = '/meals/' + id
 meal.delete_meal = (event, id) ->
   event.stopPropagation()
   global.askYesNoQuestion('Are you sure?', 'Do you really want to delete this meal?',
-    (res) ->
-      if (res == true)
-        $.ajax({
-          url: "/meals/#{id}",
-          type: 'delete',
-          success: document.location = '/meals'
-        })
+  (res) ->
+    if (res == true)
+      $.ajax({
+        url: "/meals/#{id}",
+        type: 'delete',
+        success: document.location = '/meals'
+      })
   )
   return false
 
@@ -39,17 +39,17 @@ meal.addOrderListeners = () ->
     )
   )
 
+
 window.addEventListener('load', () ->
   meal.addOrderListeners()
   $('.close-orders').click( () ->
     meal_id = $('#meal_id').data('meal-id')
     global.askYesNoQuestion("Are you sure?", "Do you really want to close orders?",
-      (res) ->
-        if (res == true)
-          $.post("/meals/#{meal_id}/closeorders", success: () -> document.location = "/meals/#{meal_id}")
+    (res) ->
+      if (res == true)
+        $.post("/meals/#{meal_id}/closeorders", success: () -> document.location = "/meals/#{meal_id}")
     )
   )
-
   window.setInterval(meal.update_orders, 30000)
 )
 

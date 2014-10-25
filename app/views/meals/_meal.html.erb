@@ -3,8 +3,11 @@
 <% if is_owner %>
     <%= link_to 'Edit', edit_meal_path(@meal), :class => 'button' %>
 <% else %>
-    <div>
-      <p>Meal being run by: <br /> <%= @meal.owner.email %></p>
+    <div id="owner">
+        <p>Meal being run by: <br /> <%= @meal.owner.email %></p>
+        <span>
+        Payment details: <br/><%= @meal.owner.payment_details %>
+        </span>
     </div>
 <% end %>
 <h2 class="title"> <%= @meal.title %> </h2>
