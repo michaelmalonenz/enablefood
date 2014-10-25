@@ -3,7 +3,9 @@
 <% if is_owner %>
     <%= link_to 'Edit', edit_meal_path(@meal), :class => 'button' %>
 <% else %>
-    <!-- Payment details, as a pop-up, and added to clipboard? -->
+    <div>
+      <p>Meal being run by: <br /> <%= @meal.owner.email %></p>
+    </div>
 <% end %>
 <h2 class="title"> <%= @meal.title %> </h2>
 <%= image_tag('menu_swirl.png', :class => 'center') %>
