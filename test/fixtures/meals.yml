@@ -5,7 +5,7 @@ meal_one:
   date: 2014-06-08
   website: www.meal.com
   orders_closed: false
-  owner_id: user_one.id
+  owner: user_one
 
 meal_two:
   title: my meal
