@@ -15,6 +15,8 @@ class MealsController < ApplicationController
     end
     check_owner
     if @meal.save
+      url = "#{request.protocol}#{request.host_with_port}#{meal_path(@meal)}"
+      MealMailer.creation_email(@meal, url).deliver
       redirect_to @meal
     else
       render 'new'
@@ -62,7 +64,7 @@ class MealsController < ApplicationController
     @meal.transaction do
       @meal.orders_closed = true
       @meal.orders.each do |o|
-        if o.description.blank? && o.cost == 0
+        if o.empty?
           Order.destroy(o)
         end
       end
