@@ -6,7 +6,7 @@
     <div id="owner">
         <p>Meal being run by: <br /> <%= @meal.owner.email %></p>
         <span>
-        Payment details: <br/><%= @meal.owner.payment_details %>
+        Payment details: <br/><%= simple_format(@meal.owner.payment_details) %>
         </span>
     </div>
 <% end %>
