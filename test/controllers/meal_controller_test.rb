@@ -37,6 +37,7 @@ class MealControllerTest < ActionController::TestCase
     assert(meal.orders.length == 2, 'Orders with an empty description and cost of 0 should be removed')
     assert(meal.orders_closed == true, 'Orders should be marked as closed')
     assert(meal.summary == "Toni Pepperoni ✕2\n", 'Same orders should be grouped')
+    assert_not ActionMailer::Base.deliveries.empty?
   end
 
   teardown do

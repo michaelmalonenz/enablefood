@@ -6,9 +6,12 @@ meal_one:
   website: www.meal.com
   orders_closed: false
   owner: user_one
+  users: user_one,user_two,user_three
 
 meal_two:
   title: my meal
   date: 2014-06-08
   website: www.sshhhh.com
   orders_closed: false
+  owner: user_two
+  users: user_one,user_two,user_three

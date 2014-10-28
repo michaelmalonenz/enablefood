@@ -1,0 +1,10 @@
+<h1><%= @meal.title %></h1>
+<p>The orders have been closed, so it's time to pay up, buddy.</p>
+<p>You ordered '<%= @order.description %>' <%= number_to_currency @order.cost %></p>
+
+<% unless @meal.owner.payment_details.blank? %>
+<p>
+    This is now payable to: <br />
+    <%= @meal.owner.payment_details %>
+</p>
+<% end %>

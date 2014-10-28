@@ -6,6 +6,7 @@
 #
 user_one:
   email: 'thing_one@drseuss.com'
+  payment_details: "Thing One\n12-3456-7891011-12"
 
 user_two:
   email: 'thing_two@drseuss.com'
@@ -15,4 +16,5 @@ user_three:
 
 user_four:
   email: 'some_other@email.com'
+
 

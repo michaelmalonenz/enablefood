@@ -70,6 +70,7 @@ class MealsController < ApplicationController
       end
       @meal.generate_summary!
       @meal.save
+      MealMailer.orders_closed_email(@meal).deliver
       flash[:notice] = "Orders closed for #{@meal.title}!"
     end
     render :nothing => true, status => :ok
