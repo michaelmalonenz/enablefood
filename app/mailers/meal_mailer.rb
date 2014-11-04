@@ -17,11 +17,9 @@ class MealMailer < ActionMailer::Base
     end
   end
 
-  def orders_closed_email(meal)
+  def orders_closed_email(meal, order)
     @meal = meal
-    @meal.orders.each do |order|
-      @order = order
-      mail(to: order.user.email, subject: "#{@meal.title} orders have been closed")
-    end
+    @order = order
+    mail(to: order.user.email, subject: "#{@meal.title} orders have been closed")
   end
 end

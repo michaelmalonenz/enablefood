@@ -7,6 +7,7 @@ class MealControllerTest < ActionController::TestCase
     @controller = MealsController.new
     @user = users(:user_one)
     sign_in @user
+    ActionMailer::Base.deliveries = []
   end
 
   test 'should post create' do
@@ -37,7 +38,15 @@ class MealControllerTest < ActionController::TestCase
     assert(meal.orders.length == 2, 'Orders with an empty description and cost of 0 should be removed')
     assert(meal.orders_closed == true, 'Orders should be marked as closed')
     assert(meal.summary == "Toni Pepperoni ✕2\n", 'Same orders should be grouped')
-    assert_not ActionMailer::Base.deliveries.empty?
+    assert_not(ActionMailer::Base.deliveries.empty?)
+    assert(ActionMailer::Base.deliveries.count == 2, 'There should be two emails sent')
+  end
+
+  test 'should not send emails without payment details' do
+    meal = meals(:meal_two)
+    post :close_orders, :id => meal.id
+    assert_response :success
+    assert(ActionMailer::Base.deliveries.count == 0, 'There should be no emails sent if the owner has no payment details')
   end
 
   teardown do

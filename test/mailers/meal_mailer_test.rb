@@ -12,12 +12,12 @@ class MealMailerTest < ActionMailer::TestCase
   end
 
   test 'orders closed payment details' do
-    email = MealMailer.orders_closed_email(meals(:meal_one))
+    email = MealMailer.orders_closed_email(meals(:meal_one), orders(:order_two))
     assert_match 'This is now payable to', email.body.to_s
   end
 
   test 'orders closed no payment details' do
-    email = MealMailer.orders_closed_email(meals(:meal_two))
+    email = MealMailer.orders_closed_email(meals(:meal_two), orders(:order_five))
     assert_no_match 'This is now payable to', email.body.to_s
   end
 end
