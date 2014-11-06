@@ -49,6 +49,14 @@ class MealControllerTest < ActionController::TestCase
     assert(ActionMailer::Base.deliveries.count == 0, 'There should be no emails sent if the owner has no payment details')
   end
 
+  test 'should not show deleted users on new' do
+    get :new
+    assert_response :success
+    new_meal = assigns(:meal)
+    assert( !new_meal.users.include?( users(:deleted_user)), "deleted users shouldn't appear in the list")
+    assert !new_meal.users.empty?, 'is_deleted should be false by default'
+  end
+
   teardown do
     sign_out @user
   end

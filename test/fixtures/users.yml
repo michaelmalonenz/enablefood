@@ -17,4 +17,8 @@ user_three:
 user_four:
   email: 'some_other@email.com'
 
+deleted_user:
+  email: 'bahleeted@homestarrunner.com'
+  payment_details: 'BAHLEETED!'
+  is_deleted: true
 

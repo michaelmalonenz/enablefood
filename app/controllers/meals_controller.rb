@@ -2,7 +2,7 @@ class MealsController < ApplicationController
   before_action :set_meal, only: [:show, :edit, :update, :destroy, :close_orders, :orders]
 
   def new
-    @users = User.all.sort_by {|u| u.email}
+    @users = User.where(is_deleted: false).order(email: :asc).all
     @meal = Meal.new do |m|
       m.users = @users
     end
