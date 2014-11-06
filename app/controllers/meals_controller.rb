@@ -86,7 +86,7 @@ class MealsController < ApplicationController
 
   private
   def check_owner
-    @meal.owner_id = current_user.id if (@meal.users.select { |u| u.id == @meal.owner_id }).empty?
+    @meal.owner_id = current_user.id if @meal.users.none? { |u| u.id == @meal.owner_id }
   end
 
   def set_meal
