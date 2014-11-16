@@ -34,7 +34,7 @@ meal.update_orders = () ->
 meal.addOrderListeners = () ->
   $('.ajax-paid').change(() ->
     order_id = this.value
-    meal.send_attribute( 'order', order_id, 'has_paid', this.checked, () ->
+    meal.send_attribute( 'orders', order_id, 'has_paid', this.checked, () ->
       meal.update_orders()
     )
   )
