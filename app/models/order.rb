@@ -15,4 +15,5 @@ class Order < ActiveRecord::Base
     params[:cost] = 0.0 if params[:cost] == ''
     super(params)
   end
+
 end

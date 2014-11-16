@@ -1,6 +1,12 @@
-class OrderController < ApplicationController
+class OrdersController < ApplicationController
 
   before_action :set_order, only: [:update, :attribute]
+
+  def construct
+    sanitised_params = create_params
+    @order = Order.create(meal_id: sanitised_params[:meal_id], user_id: sanitised_params[:user_id])
+    render :partial => 'order_form', status => :created
+  end
 
   def update
     if @order.meal.orders_closed?
@@ -28,6 +34,10 @@ class OrderController < ApplicationController
 
   def permitted_attributes
     [:description, :cost, :has_paid]
+  end
+
+  def create_params
+    params.permit(:user_id, :meal_id)
   end
 
   def order_params

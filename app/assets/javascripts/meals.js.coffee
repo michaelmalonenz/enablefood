@@ -39,7 +39,6 @@ meal.addOrderListeners = () ->
     )
   )
 
-
 window.addEventListener('load', () ->
   meal.addOrderListeners()
   $('.close-orders').click( () ->
@@ -50,6 +49,15 @@ window.addEventListener('load', () ->
         $.post("/meals/#{meal_id}/closeorders", success: () -> document.location = "/meals/#{meal_id}")
     )
   )
+  $('.new_order').click(() ->
+    user_id = $(this).data('user-id')
+    meal_id = $(this).data('meal-id')
+    $.post("/orders/construct", { meal_id : meal_id, user_id : user_id}, (data) ->
+      $('.orders_container').append(data)
+    )
+  )
   window.setInterval(meal.update_orders, 30000)
 )
+
+
 

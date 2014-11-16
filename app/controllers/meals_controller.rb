@@ -61,27 +61,18 @@ class MealsController < ApplicationController
   end
 
   def close_orders
-    @meal.transaction do
-      @meal.orders_closed = true
-      @meal.orders.each do |o|
-        if o.empty?
-          @meal.orders.delete(o)
-        end
+    @meal.close_orders
+    unless @meal.owner.payment_details.blank?
+      @meal.orders.each do |order|
+        MealMailer.orders_closed_email(@meal, order).deliver
       end
-      @meal.generate_summary!
-      @meal.save
-      unless @meal.owner.payment_details.blank?
-        @meal.orders.each do |order|
-          MealMailer.orders_closed_email(@meal, order).deliver
-        end
-      end
-      flash[:notice] = "Orders closed for #{@meal.title}!"
     end
+    flash[:notice] = "Orders closed for #{@meal.title}!"
     render :nothing => true, status => :ok
   end
 
   def orders
-    render :partial => 'order/order_table', status => :ok
+    render :partial => 'orders/order_table', status => :ok
   end
 
   private

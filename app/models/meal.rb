@@ -20,6 +20,19 @@ class Meal < ActiveRecord::Base
     return owing
   end
 
+  def close_orders
+    transaction do
+      self.orders_closed = true
+      orders.each do |o|
+        if o.empty?
+          orders.delete(o)
+        end
+      end
+    end
+    generate_summary!
+    save()
+  end
+
   def generate_summary!
     same_orders = {}
     orders.each do |o|

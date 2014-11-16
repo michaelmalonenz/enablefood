@@ -10,23 +10,24 @@
         </span>
     </div>
 <% end %>
+<div class="right"><h3> <%= @meal.date %> </h3></div>
 <h2 class="title"> <%= @meal.title %> </h2>
 <%= image_tag('menu_swirl.png', :class => 'center') %>
-<div class="right"><h3> <%= @meal.date %> </h3></div>
 
 <div id="meal_id" data-meal-id="<%=@meal.id%>"></div>
 <p>
   <%= link_to @meal.website, @meal.website, :target => '_blank' %>
 </p>
-<p>
-  <% order = @meal.orders.where(user_id: current_user.id).take %>
-  <% if !order.nil? && !@meal.orders_closed %>
-    <% @order = order %>
-    <%= render('order/order_form') %>
+<div class="orders_container">
+  <% @meal.orders.all.where(user_id: current_user.id).each do |order| %>
+    <% if !order.nil? && !@meal.orders_closed %>
+       <% @order = order %>
+       <%= render('orders/order_form') %>
+    <% end %>
   <% end %>
-</p>
+</div>
 <div>
-  <%= render('order/order_table', :locals => { :owner => is_owner, :meal => @meal }) %>
+  <%= render('orders/order_table', :locals => { :owner => is_owner, :meal => @meal }) %>
   <% if is_owner && !@meal.orders_closed %>
     <div class="right-ish">
         <div class="button right close-orders" > Close Orders </div>

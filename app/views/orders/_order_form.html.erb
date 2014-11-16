@@ -1,0 +1,12 @@
+<%= form_for @order do |f| %>
+    <div class="center no-wrap">
+        <%= f.label 'Your Order:' %>
+        <%= f.text_field :description, size: 50, placeholder: 'desired item' %>
+        <%= f.label '$' %>
+        <%= f.text_field :cost, size:15, placeholder: 'price', :value => number_with_precision(f.object.cost, :precision => 2) %>
+        <%= f.submit 'Update Order!' %>
+        <a href="#" class="new_order" data-user-id="<%= @order.user_id %>" data-meal-id="<%= @order.meal_id %>">[+]</a>
+    </div>
+<% end %>
+<div class="spacer"></div>
+

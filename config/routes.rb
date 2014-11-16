@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :meals
-  resources :order
+  resources :orders, only: [:update]
 
-  post 'order/update' => 'order#update'
-  post 'order/attribute' => 'order#attribute'
+  post 'orders/attribute' => 'orders#attribute'
+  post 'orders/construct' => 'orders#construct'
 
   post 'meals/:id/closeorders' => 'meals#close_orders'
   get 'meals/:id/orders' => 'meals#orders'
