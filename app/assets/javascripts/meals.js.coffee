@@ -28,18 +28,17 @@ meal.update_orders = () ->
   $.get("/meals/#{mealId}/orders",
   (data) ->
       $('#orders').html(data)
-      meal.addOrderListeners()
   )
 
-meal.addOrderListeners = () ->
+meal.updateOrderListeners = () ->
+  $('.ajax-paid').off('change')
   $('.ajax-paid').on('change', () ->
     order_id = this.value
     meal.send_attribute( 'orders', order_id, 'has_paid', this.checked, () ->
       meal.update_orders()
+      meal.updateOrderListeners()
     )
   )
-
-meal.updateNewOrderListeners = () ->
   $('.new_order').off('click')
   $('.new_order').on('click', () ->
     user_id = $(this).data('user-id')
@@ -49,11 +48,19 @@ meal.updateNewOrderListeners = () ->
       meal.updateNewOrderListeners()
     )
   )
+  $('.delete_order').off('click')
+  $('.delete_order').on('click', () ->
+    order_id = $(this).data('order-id')
+    $.ajax({
+      url: "/orders/#{order_id}",
+      type: 'delete'
+    })
+    $(this).parent().parent().remove()
+  )
 
 
 window.addEventListener('load', () ->
-  meal.addOrderListeners()
-  meal.updateNewOrderListeners()
+  meal.updateOrderListeners()
   $('.close-orders').click( () ->
     meal_id = $('#meal_id').data('meal-id')
     global.askYesNoQuestion("Are you sure?", "Do you really want to close orders?",
@@ -62,6 +69,7 @@ window.addEventListener('load', () ->
         $.post("/meals/#{meal_id}/closeorders", success: () -> document.location = "/meals/#{meal_id}")
     )
   )
+
   window.setInterval(meal.update_orders, 30000)
 )
 

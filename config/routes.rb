@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :meals
-  resources :orders, only: [:update]
+  resources :orders, only: [:update, :destroy]
 
   post 'orders/attribute' => 'orders#attribute'
   post 'orders/construct' => 'orders#construct'

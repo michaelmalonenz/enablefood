@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-  before_action :set_order, only: [:update, :attribute]
+  before_action :set_order, only: [:update, :attribute, :destroy]
 
   def construct
     sanitised_params = create_params
@@ -15,6 +15,11 @@ class OrdersController < ApplicationController
       flash[:notice] = 'Order placed!'
     end
     redirect_to @order.meal
+  end
+
+  def destroy
+    @order.delete()
+    render :nothing => true, status: :ok
   end
 
   def attribute

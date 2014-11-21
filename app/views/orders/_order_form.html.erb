@@ -1,5 +1,6 @@
 <%= form_for @order do |f| %>
     <div class="center no-wrap">
+        <a href="#" class="delete_order" data-order-id="<%= @order.id %>">[-]</a>
         <%= f.label 'Your Order:' %>
         <%= f.text_field :description, size: 50, placeholder: 'desired item' %>
         <%= f.label '$' %>
