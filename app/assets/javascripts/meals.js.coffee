@@ -32,28 +32,34 @@ meal.update_orders = () ->
   )
 
 meal.addOrderListeners = () ->
-  $('.ajax-paid').change(() ->
+  $('.ajax-paid').on('change', () ->
     order_id = this.value
     meal.send_attribute( 'orders', order_id, 'has_paid', this.checked, () ->
       meal.update_orders()
     )
   )
 
+meal.updateNewOrderListeners = () ->
+  $('.new_order').off('click')
+  $('.new_order').on('click', () ->
+    user_id = $(this).data('user-id')
+    meal_id = $(this).data('meal-id')
+    $.post("/orders/construct", { meal_id : meal_id, user_id : user_id}, (data) ->
+      $('.orders_container').append(data)
+      meal.updateNewOrderListeners()
+    )
+  )
+
+
 window.addEventListener('load', () ->
   meal.addOrderListeners()
+  meal.updateNewOrderListeners()
   $('.close-orders').click( () ->
     meal_id = $('#meal_id').data('meal-id')
     global.askYesNoQuestion("Are you sure?", "Do you really want to close orders?",
     (res) ->
       if (res == true)
         $.post("/meals/#{meal_id}/closeorders", success: () -> document.location = "/meals/#{meal_id}")
-    )
-  )
-  $('.new_order').click(() ->
-    user_id = $(this).data('user-id')
-    meal_id = $(this).data('meal-id')
-    $.post("/orders/construct", { meal_id : meal_id, user_id : user_id}, (data) ->
-      $('.orders_container').append(data)
     )
   )
   window.setInterval(meal.update_orders, 30000)
