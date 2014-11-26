@@ -63,9 +63,9 @@ class MealsController < ApplicationController
   def close_orders
     @meal.close_orders
     unless @meal.owner.payment_details.blank?
-      @meal.orders.each do |order|
-        MealMailer.orders_closed_email(@meal, order).deliver
-      end
+      #@meal.orders.each do |order|
+      #  MealMailer.orders_closed_email(@meal, order).deliver
+      #end
     end
     flash[:notice] = "Orders closed for #{@meal.title}!"
     render :nothing => true, status => :ok
