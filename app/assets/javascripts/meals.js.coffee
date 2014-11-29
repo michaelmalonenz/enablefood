@@ -28,16 +28,14 @@ meal.update_orders = () ->
   $.get("/meals/#{mealId}/orders",
   (data) ->
       $('#orders').html(data)
+      meal.update_order_listeners()
   )
 
 meal.update_order_listeners = () ->
   $('.ajax-paid').off('change')
   $('.ajax-paid').on('change', () ->
     order_id = this.value
-    meal.send_attribute( 'orders', order_id, 'has_paid', this.checked, () ->
-      meal.update_orders()
-      meal.update_order_listeners()
-    )
+    meal.send_attribute( 'orders', order_id, 'has_paid', this.checked, meal.update_orders )
   )
   $('.new_order').off('click')
   $('.new_order').on('click', () ->
@@ -46,7 +44,6 @@ meal.update_order_listeners = () ->
     $.post("/orders/construct", { meal_id : meal_id, user_id : user_id}, (data) ->
       $('.orders_container').append(data)
       meal.update_orders()
-      meal.update_order_listeners()
     )
   )
   $('.delete_order').off('click')
@@ -55,9 +52,7 @@ meal.update_order_listeners = () ->
     $.ajax({
       url: "/orders/#{order_id}",
       type: 'delete'
-      success: () ->
-        meal.update_orders()
-        meal.update_order_listeners()
+      success: meal.update_orders
     })
     form = $(this).closest('form')
     form.next('div.spacer').remove()
