@@ -47,7 +47,12 @@ meal.update_order_listeners = () ->
     )
   )
   $('.delete_order').off('click')
-  $('.delete_order').on('click', () ->
+  $('.delete_order').on('click', (event) ->
+    array = jQuery.makeArray($('.orders_container>form'))
+    if (array.length == 1)
+      alert('Stop it, Craig!')
+      event.stopPropagation()
+      return
     order_id = $(this).data('order-id')
     $.ajax({
       url: "/orders/#{order_id}",
